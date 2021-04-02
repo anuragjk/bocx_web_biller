@@ -1,0 +1,57 @@
+
+<head>
+    <title>Bocx web</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        function add(){
+        var new_chq_no = parseInt($('#total_chq').val())+1;
+        var new_input="<input type='text' id='new_"+new_chq_no+"'>";
+
+        var new_input1="<p>Item Name "+new_chq_no+"<input type ='text' name = 'item_name_"+new_chq_no+"' /></p> <p>Item Qty "+new_chq_no+"<input type ='text' name = 'item_qty_"+new_chq_no+"' /></p> <p>Item Rate "+new_chq_no+"<input type ='text' name = 'item_rate_"+new_chq_no+"' /></p>"
+
+
+        $('#new_chq').append(new_input1);
+        $('#total_chq').val(new_chq_no)
+        }
+        
+        function remove(){
+        var last_chq_no = $('#total_chq').val();
+        if(last_chq_no>1){
+            $('#new_'+last_chq_no).remove();
+            $('#total_chq').val(last_chq_no-1);
+        }
+        }
+    </script>
+
+</head>
+  
+<html>
+    <body>
+        <form action = "http://192.168.29.62:6969/result" method = "POST">
+            <p>Shop Name <input type = "text" name = "shop_name" /></p>
+            <p>Address <input type = "text" name = "address" /></p>
+            <p>Bill No <input type = "text" name = "bill_no" /></p>
+            <p>Date <input type ="text" name = "date" /></p>
+
+            <p>Shop message<input type ="text" name = "shop_message" /></p>
+
+            <p>Item Name 1<input type ="text" name = "item_name_1" /></p>
+            <p>Item Qty 1<input type ="text" name = "item_qty_1" /></p>
+            <p>Item Rate 1<input type ="text" name = "item_rate_1" /></p>
+
+            <div id="new_chq"></div>
+            
+            <button type = "button" onclick="add()">Add</button>
+            <button type = "button" onclick="remove()">remove</button>
+            
+            <input type="hidden" value="1" id="total_chq">
+
+            <p><input type = "submit" value = "Print" /></p>
+        </form>
+    </body>
+</html>
